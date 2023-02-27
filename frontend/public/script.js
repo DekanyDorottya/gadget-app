@@ -40,6 +40,12 @@ function createOptionsForAllergens(allergen) {
     .insertAdjacentHTML("beforeend", `<option value="${allergen}">`);
 }
 
+function createElementForImage(pizzaId, url){
+  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin", 
+  `<div class="image"><img src="${url}" width="200" height="300"></div>`)
+  
+  }
+
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
   const pizzas = await response.json();
@@ -49,6 +55,7 @@ async function fetchPizzas() {
 
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza.name);
+    createElementForImage(pizza.name, pizza.imgUrl)
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);

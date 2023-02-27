@@ -1,7 +1,7 @@
 {
   "name": "pizza",
   "version": "1.0.0",
-  "description": "",
+  "description": "No starter code is provided. Start from scratch!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodecoolGlobal/pizza-order-prototype-javascript-bettitaksas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CodecoolGlobal/pizza-order-prototype-javascript-bettitaksas/issues"
+  },
+  "homepage": "https://github.com/CodecoolGlobal/pizza-order-prototype-javascript-bettitaksas#readme"
 }
