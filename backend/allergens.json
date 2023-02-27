@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "gluten"
+  },
+  {
+    "id": 2,
+    "name": "lactose"
+  },
+  {
+    "id": 3,
+    "name": "eggs"
+  },
+  {
+    "id": 4,
+    "name": "seafood"
+  },
+  {
+    "id": 5,
+    "name": "peanut"
+  },
+  {
+    "id": 6,
+    "name": "soybeans"
+  },
+  {
+    "id": 7,
+    "name": "wheat"
+  },
+  {
+    "id": 8,
+    "name": "milk"
+  },
+  {
+    "id": 9,
+    "name": "almond"
+  }
+]

@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "name": "Marinara",
+    "ingredients": [
+      "San Marzano tomato sauce",
+      "garlic",
+      "oregano",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [1, 7]
+  },
+  {
+    "id": 2,
+    "name": "Margherita",
+    "ingredients": [
+      "tomato sauce",
+      "garlic",
+      "oregano",
+      "olive oil",
+      "cheese"
+    ],
+    "price": 3100,
+    "allergens": [1, 2, 8, 7]
+  },
+  {
+    "id": 3,
+    "name": "BBQ",
+    "ingredients": [
+      "tomato",
+      "garlic",
+      "pepper",
+      "oregano",
+      "bacon"
+    ],
+    "price": 3300,
+    "allergens": [1, 7]
+  },
+  {
+    "id": 4,
+    "name": "Hawaiian",
+    "ingredients": [
+      "tomato sauce",
+      "tomatoes",
+      "pineapple",
+      "ham",
+      "mozzarella"
+    ],
+    "price": 3400,
+    "allergens": [1, 2, 8]
+  },
+  {
+    "id": 5,
+    "name": "Buffalo",
+    "ingredients": [
+      "tomato sauce",
+      "ham",
+      "garlic",
+      "pepper",
+      "olive oil"
+    ],
+    "price": 3350,
+    "allergens": [1, 7]
+  },
+  {
+    "id": 6,
+    "name": "Las Vegans",
+    "ingredients": [
+      "tomato sauce",
+      "eggplant",
+      "garlic",
+      "oregano",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [6]
+  },
+  {
+    "id": 7,
+    "name": "Pepperoni",
+    "ingredients": [
+      "tomato sauce",
+      "salami",
+      "pepperoni paprika",
+      "garlic",
+      "olive oil"
+    ],
+    "price": 3400,
+    "allergens": [1, 7]
+  },
+  {
+    "id": 8,
+    "name": "Quattro Formaggi",
+    "ingredients": [
+      "tomato sauce",
+      "mozzarella",
+      "oregano",
+      "parmezan",
+      "gorgonzola",
+      "fontina"
+    ],
+    "price": 3600,
+    "allergens": [1, 2, 8, 7]
+  },
+  {
+    "id": 9,
+    "name": "Seafood",
+    "ingredients": [
+      "San Marzano tomato sauce",
+      "shrimp",
+      "octopus",
+      "garlic",
+      "olive oil"
+    ],
+    "price": 3500,
+    "allergens": [1, 4]
+  },
+  {
+    "id": 10,
+    "name": "Tuna",
+    "ingredients": [
+      "tomato sauce",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [1, 4]
+  }
+]
