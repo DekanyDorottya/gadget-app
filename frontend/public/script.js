@@ -35,6 +35,7 @@ Adress
 </form>`
 )
 
+let packageFormElement = document.getElementById("packageForm")
 const elementOfAllThePizzas = document.getElementById("pizzas");
 
 function createElementForPizza(pizza) {
@@ -46,10 +47,15 @@ function createElementForPizza(pizza) {
         <input class="amountBtn" id="${pizza.name}AmountBtn">amount</input> 
     </div>`
   );
+
   document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
     handleAddToCart(pizza.id)
   })
 }
+
+document.getElementById("cart").addEventListener("click", function() {
+  packageFormElement.classList.remove("packageForm")
+})
 
 function createElementForPizzaAllergents(allergen, pizzaId) {
   document
