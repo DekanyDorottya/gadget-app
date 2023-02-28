@@ -9,6 +9,10 @@ rootElement.insertAdjacentHTML(
         <datalist id="filter"></datalist>
 
         <button id="cart">cart</button>
+        <div id="cartContent">
+          <div id="itemName"><div>
+          <div id="itemAmount"></div>
+        </div>
 </div>
 <div id="pizzas"></div>
 <div id="footer"></div>
@@ -44,7 +48,12 @@ function createElementForImage(pizzaId, url){
   document.getElementById(pizzaId).insertAdjacentHTML("afterbegin", 
   `<div class="image"><img src="${url}" width="200" height="300"></div>`)
   
-  }
+}
+
+function createDivForAddedItems(addedItem) {
+  document.getElementById('itemName').insertAdjacentHTML('beforeend', `<div id="${addedItem}"></div>`);
+  
+}
 
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
@@ -91,6 +100,9 @@ async function fetchPizzas() {
   filterPizzasByAllergent();
 }
 fetchPizzas();
+
+
+
 
 async function sendFormData() {
   /* const myData = document.getElementById("myData");
