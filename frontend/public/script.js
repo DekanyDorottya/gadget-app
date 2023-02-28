@@ -25,6 +25,10 @@ rootElement.insertAdjacentHTML(
         <datalist id="filter"></datalist>
 
         <button id="cart">cart</button>
+        <div id="cartContent">
+          <div id="itemName"><div>
+          <div id="itemAmount"></div>
+        </div>
 </div>
 <div id="pizzas"></div>
 <div id="footer"></div>
@@ -44,9 +48,9 @@ Adress
 </div>
 <div><input type="submit" value="Save Package"/></div>
 </form>`
-)
+);
 
-let packageFormElement = document.getElementById("packageForm")
+let packageFormElement = document.getElementById("packageForm");
 const elementOfAllThePizzas = document.getElementById("pizzas");
 let customerNameElement = document.getElementById("customerName")
 let emailElement = document.getElementById("email")
@@ -64,9 +68,11 @@ function createElementForPizza(pizza) {
     </div>`
   );
 
-  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
-    handleAddToCart(pizza.id)
-  })
+  document
+    .getElementById(`${pizza.name}AddBtn`)
+    .addEventListener("click", function () {
+      handleAddToCart(pizza.id);
+    });
 }
 
 document.getElementById("cart").addEventListener("click", function () {
@@ -95,10 +101,19 @@ function createOptionsForAllergens(allergen) {
     .insertAdjacentHTML("beforeend", `<option value="${allergen}">`);
 }
 
-function createElementForImage(pizzaId, url) {
-  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin",
-    `<div class="image"><img src="${url}" width="200" height="300"></div>`)
+function createDivForAddedItems(addedItem) {
+  document
+    .getElementById("itemName")
+    .insertAdjacentHTML("beforeend", `<div id="${addedItem}"></div>`);
+}
 
+function createElementForImage(pizzaId, url) {
+  document
+    .getElementById(pizzaId)
+    .insertAdjacentHTML(
+      "afterbegin",
+      `<div class="image"><img src="${url}" width="200" height="300"></div>`
+    );
 }
 
 function handleAddToCart(pizzaId) {
@@ -109,7 +124,7 @@ function handleAddToCart(pizzaId) {
   } else {
     cartItemList[0].amount += 1;
   }
-  console.log("cart", cart)
+  console.log("cart", cart);
 }
 
 async function fetchPizzas() {
@@ -121,7 +136,7 @@ async function fetchPizzas() {
 
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
-    createElementForImage(pizza.name, pizza.imgUrl)
+    createElementForImage(pizza.name, pizza.imgUrl);
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
@@ -139,13 +154,22 @@ async function fetchPizzas() {
       .addEventListener("change", function (event) {
         allergens.forEach((allergen) => {
           if (allergen.name === event.target.value) {
+            console.log("allergen.name", allergen.name);
+            console.log("event.target.value", event.target.value);
             document.getElementById("pizzas").replaceChildren();
             pizzas.filter((pizza) => {
-              if (!pizza.allergens.includes(allergen.id)) {
-                createElementForPizza(pizza.name);
+              if (pizza.allergens.includes(allergen.id)) {
+                createElementForPizza(pizza);
+                createElementForImage(pizza.name, pizza.imgUrl);
                 allergens.forEach((allerg) => {
                   if (pizza.allergens.includes(allerg.id)) {
-                    createElementForPizzaAllergents(allerg.name, pizza.name);
+                    console.log("tartalmazza");
+                    document
+                      .getElementById(pizza.name)
+                      .insertAdjacentHTML(
+                        "beforeend",
+                        `<div class="name">${allerg.name}</div>`
+                      ); 
                   }
                 });
               }
@@ -165,13 +189,13 @@ async function sendFormData() {
   const obj = Object.fromEntries(formData); */
 
   const res = await fetch("http://127.0.0.1:9001/api/order", {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
+    method: "post",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      "user": {
-        "email": "email",
-        "password": "password"
-      }
+      user: {
+        email: "email",
+        password: "password",
+      },
     }),
   });
   const response = await res.json();
