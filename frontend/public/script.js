@@ -4,6 +4,7 @@
 //   {id: 8, amount: 1}],
 const cart = {
   pizzas: [],
+  date: generateCurrentDate(),
   customer: {
     name: "",
     email: "",
@@ -126,6 +127,25 @@ function handleAddToCart(pizzaId) {
   }
   console.log("cart", cart);
 }
+
+function generateCurrentDate() {
+
+  const currentDate = new Date().toJSON().slice(0, 10)
+  const currentMinSec = new Date().toJSON().slice(11, 16)
+  let split = currentDate.split("-")
+  let splitMinSec = currentMinSec.split(":")
+  const date = {
+    year: split[0],
+    month: split[1],
+    day: split[2],
+    hour: splitMinSec[0],
+    minute: splitMinSec[1]
+  }
+  // console.log(currentMinSec)
+  return date
+
+}
+
 
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
