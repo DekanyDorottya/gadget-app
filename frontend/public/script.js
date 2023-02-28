@@ -2,7 +2,17 @@
 //
 //  [{id: 1, amount: 2}
 //   {id: 8, amount: 1}],
-const cart = [];
+const cart = {
+  pizzas: [],
+  customer: {
+    name: "",
+    email: "",
+    address: {
+      city: "",
+      street: ""
+    }
+  }
+};
 
 const rootElement = document.getElementById("root");
 rootElement.insertAdjacentHTML(
@@ -23,8 +33,8 @@ rootElement.insertAdjacentHTML(
 
 rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
-formElement.insertAdjacentHTML("beforeend", 
-`<form id="packageForm" class="packageForm" name="packageForm">
+formElement.insertAdjacentHTML("beforeend",
+  `<form id="packageForm" class="packageForm" name="packageForm">
 <div><input id="customerName" type="text" name="customerName"></div>
 <div><input id="email" type="text" name="email"></div>
 <div id="adress">
@@ -32,11 +42,17 @@ Adress
 <div><input id="city" type="text" name="city"></div>
 <div><input id="street" type="text" name="street"></div>
 </div>
+<div><input type="submit" value="Save Package"/></div>
 </form>`
 )
 
 let packageFormElement = document.getElementById("packageForm")
 const elementOfAllThePizzas = document.getElementById("pizzas");
+let customerNameElement = document.getElementById("customerName")
+let emailElement = document.getElementById("email")
+let cityElement = document.getElementById("city")
+let streetElement = document.getElementById("street")
+
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
@@ -53,8 +69,18 @@ function createElementForPizza(pizza) {
   })
 }
 
-document.getElementById("cart").addEventListener("click", function() {
+document.getElementById("cart").addEventListener("click", function () {
   packageFormElement.classList.remove("packageForm")
+})
+
+packageFormElement.addEventListener("submit", function (event) {
+  event.preventDefault()
+
+  cart.customer.name = customerNameElement.value
+  cart.customer.email = emailElement.value
+  cart.customer.address.city = cityElement.value
+  cart.customer.address.street = streetElement.value
+  console.log(cart)
 })
 
 function createElementForPizzaAllergents(allergen, pizzaId) {
@@ -76,10 +102,10 @@ function createElementForImage(pizzaId, url) {
 }
 
 function handleAddToCart(pizzaId) {
-  let cartItemList = cart.filter((item) => item.id === pizzaId)
+  let cartItemList = cart.pizzas.filter((item) => item.id === pizzaId)
 
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, amount: 1 })
+    cart.pizzas.push({ id: pizzaId, amount: 1 })
   } else {
     cartItemList[0].amount += 1;
   }
