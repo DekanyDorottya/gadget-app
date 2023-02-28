@@ -25,10 +25,11 @@ rootElement.insertAdjacentHTML(
 `
 );
 
-rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
-let formElement = document.getElementById("form")
-formElement.insertAdjacentHTML("beforeend", 
-`<form id="packageForm" class="packageForm" name="packageForm">
+rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`);
+let formElement = document.getElementById("form");
+formElement.insertAdjacentHTML(
+  "beforeend",
+  `<form id="packageForm" class="packageForm" name="packageForm">
 <div><input id="customerName" type="text" name="customerName"></div>
 <div><input id="email" type="text" name="email"></div>
 <div id="adress">
@@ -37,9 +38,9 @@ Adress
 <div><input id="street" type="text" name="street"></div>
 </div>
 </form>`
-)
+);
 
-let packageFormElement = document.getElementById("packageForm")
+let packageFormElement = document.getElementById("packageForm");
 const elementOfAllThePizzas = document.getElementById("pizzas");
 
 function createElementForPizza(pizza) {
@@ -52,14 +53,16 @@ function createElementForPizza(pizza) {
     </div>`
   );
 
-  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
-    handleAddToCart(pizza.id)
-  })
+  document
+    .getElementById(`${pizza.name}AddBtn`)
+    .addEventListener("click", function () {
+      handleAddToCart(pizza.id);
+    });
 }
 
-document.getElementById("cart").addEventListener("click", function() {
-  packageFormElement.classList.remove("packageForm")
-})
+document.getElementById("cart").addEventListener("click", function () {
+  packageFormElement.classList.remove("packageForm");
+});
 
 function createElementForPizzaAllergents(allergen, pizzaId) {
   document
@@ -74,23 +77,29 @@ function createOptionsForAllergens(allergen) {
 }
 
 function createDivForAddedItems(addedItem) {
-  document.getElementById('itemName').insertAdjacentHTML('beforeend', `<div id="${addedItem}"></div>`);
+  document
+    .getElementById("itemName")
+    .insertAdjacentHTML("beforeend", `<div id="${addedItem}"></div>`);
 }
 
 function createElementForImage(pizzaId, url) {
-  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin",
-    `<div class="image"><img src="${url}" width="200" height="300"></div>`)
+  document
+    .getElementById(pizzaId)
+    .insertAdjacentHTML(
+      "afterbegin",
+      `<div class="image"><img src="${url}" width="200" height="300"></div>`
+    );
 }
 
 function handleAddToCart(pizzaId) {
-  let cartItemList = cart.filter((item) => item.id === pizzaId)
+  let cartItemList = cart.filter((item) => item.id === pizzaId);
 
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, amount: 1 })
+    cart.push({ id: pizzaId, amount: 1 });
   } else {
     cartItemList[0].amount += 1;
   }
-  console.log("cart", cart)
+  console.log("cart", cart);
 }
 
 async function fetchPizzas() {
@@ -102,7 +111,7 @@ async function fetchPizzas() {
 
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
-    createElementForImage(pizza.name, pizza.imgUrl)
+    createElementForImage(pizza.name, pizza.imgUrl);
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
@@ -120,13 +129,22 @@ async function fetchPizzas() {
       .addEventListener("change", function (event) {
         allergens.forEach((allergen) => {
           if (allergen.name === event.target.value) {
+            console.log("allergen.name", allergen.name);
+            console.log("event.target.value", event.target.value);
             document.getElementById("pizzas").replaceChildren();
             pizzas.filter((pizza) => {
-              if (!pizza.allergens.includes(allergen.id)) {
-                createElementForPizza(pizza.name);
+              if (pizza.allergens.includes(allergen.id)) {
+                createElementForPizza(pizza);
+                createElementForImage(pizza.name, pizza.imgUrl);
                 allergens.forEach((allerg) => {
                   if (pizza.allergens.includes(allerg.id)) {
-                    createElementForPizzaAllergents(allerg.name, pizza.name);
+                    console.log("tartalmazza");
+                    document
+                      .getElementById(pizza.name)
+                      .insertAdjacentHTML(
+                        "beforeend",
+                        `<div class="name">${allerg.name}</div>`
+                      ); 
                   }
                 });
               }
@@ -139,9 +157,6 @@ async function fetchPizzas() {
 }
 fetchPizzas();
 
-
-
-
 async function sendFormData() {
   /* const myData = document.getElementById("myData");
   const formData = new FormData(myData);
@@ -149,13 +164,13 @@ async function sendFormData() {
   const obj = Object.fromEntries(formData); */
 
   const res = await fetch("http://127.0.0.1:9001/api/order", {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
+    method: "post",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      "user": {
-        "email": "email",
-        "password": "password"
-      }
+      user: {
+        email: "email",
+        password: "password",
+      },
     }),
   });
   const response = await res.json();
