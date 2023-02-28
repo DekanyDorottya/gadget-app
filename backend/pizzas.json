@@ -3,80 +3,85 @@
     "id": 1,
     "name": "Dry Feet",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/umbrella-shoes_img_60047447b4924.jpg",
-    "decription": "Hate having your feet get wet while walking in the rain? Those thousand-dollar shoes you’re out and about flaunting will surely get ruined. While you hesitate to duck under the cover of a nearby shoe store, try purchasing a pair of these instead",
+    "description": "Hate having your feet get wet while walking in the rain? Those thousand-dollar shoes you’re out and about flaunting will surely get ruined. While you hesitate to duck under the cover of a nearby shoe store, try purchasing a pair of these instead",
     "ingredients": [
-      "garlic",
-      "oregano",
+      "Plastic",
+      "Aluminum",
       "olive oil"
     ],
     "price": 3200,
-    "allergens": [1, 7]
+    "allergens": [15, 14, 20]
   },
   
   {
-    "id": 7,
+    "id": 2,
     "name": "Toilet Cap Dispenser",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/spicytec-e1585664103722_img_6004744cc6299.jpg",
+    "description": "This is another good alternative when you’re out on an errand. You wouldn’t have to dig in your bag and shuffle through the various items. You can simply pull and tear off the necessary plies of tissue, blow, then discard.",
     "ingredients": [
-      "This is another good alternative when you’re out on an errand. You wouldn’t have to dig in your bag and shuffle through the various items. You can simply pull and tear off the necessary plies of tissue, blow, then discard.",
+      "Plastic",
       "salami",
       "pepperoni paprika",
       "garlic",
       "olive oil"
     ],
     "price": 3400,
-    "allergens": [1, 7]
+    "allergens": [15, 14]
   },
   {
-    "id": 10,
+    "id": 3,
     "name": "Neighborhood Walk",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/cN8MWj9qZjAnRNXUPP8pLzXamOf2XgJ6aLnUQjEWzoiI1549722145447compressflag_img_6004745034514.jpg",
+    "description": "This requires some degree of exertion but we think it’s worth it. We bet your goldfish has always wanted to view the neighborhood and drop by the basketball court, or at the very least swim with the ball in the tank.",
     "ingredients": [
-      "This requires some degree of exertion but we think it’s worth it. We bet your goldfish has always wanted to view the neighborhood and drop by the basketball court, or at the very least swim with the ball in the tank.",
+      "Plastic",
       "garlic",
       "tuna",
       "lime",
       "olive oil"
     ],
     "price": 3200,
-    "allergens": [1, 4]
+    "allergens": [15, 16]
   },
   {
-    "id": 5,
+    "id": 4,
     "name": "Shove It Like The Swiss",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/chindogu-32-e1585649072870_img_6004744ac9776.png",
+    "description": "The beauty of a Swiss knife is that it’s handy and that it houses a little of several functions — nail cutting, filing, unscrewing, and the like. Someone tried to apply the same concept with farming tools. Would you dare put your back into gardening with this tool?",
     "ingredients": [
-      "The beauty of a Swiss knife is that it’s handy and that it houses a little of several functions — nail cutting, filing, unscrewing, and the like. Someone tried to apply the same concept with farming tools. Would you dare put your back into gardening with this tool?",
+      "Plastic",
       "ham",
       "garlic",
       "pepper",
       "olive oil"
     ],
     "price": 3350,
-    "allergens": [1, 7]
+    "allergens": [15, 19, 14]
   },
   {
-    "id": 6,
+    "id": 5,
     "name": "Wearable TV Screen",
-    "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/tv-hat_img_6004744c3bbe1.jpg",
+    "imgUrl":"https://i.pinimg.com/originals/5c/9a/a3/5c9aa30dd661a8bda75c709bfb72cf26.jpg",
+    "description": "When shutting the world out, you only have limited options. You can either use earphones that have cables that can be pulled, or oversized t-shirts that will hopefully disguise you. But there aren’t any to cater to your visual entertainment.",
     "ingredients": [
-      "When shutting the world out, you only have limited options. You can either use earphones that have cables that can be pulled, or oversized t-shirts that will hopefully disguise you. But there aren’t any to cater to your visual entertainment.",
+      "Plastic",
       "eggplant",
       "garlic",
       "oregano",
       "olive oil"
     ],
     "price": 3200,
-    "allergens": [6]
+    "allergens": [15, 16, 20]
   },
   
   
   {
-    "id": 8,
+    "id": 6,
     "name": "Wipers on Glasses",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/Screen-Shot-2020-03-31-at-12.38.16-e1585647580391_img_6004744de5b8b.png",
+    "description": "This would be very useful if rain starts pouring while you’re cycling. You would have been forced to pull to a curb and wait it out under a shade- wasting nearly an hour of paid work. But now you can get to the office on time fully drenched to the core.",
     "ingredients": [
-      "This would be very useful if rain starts pouring while you’re cycling. You would have been forced to pull to a curb and wait it out under a shade- wasting nearly an hour of paid work. But now you can get to the office on time fully drenched to the core.",
+      "Plastic",
       "mozzarella",
       "oregano",
       "parmezan",
@@ -84,50 +89,128 @@
       "fontina"
     ],
     "price": 3600,
-    "allergens": [1, 2, 8, 7]
+    "allergens": [15, 2]
   },
   {
-    "id": 9,
+    "id": 7,
     "name": "Proper Hygiene",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/NEW-INVENTIONS-5e71f903e86d8__880_img_6004744f33923.jpg",
+    "description": "Now that handwashing has become a necessity, so should good hygiene. All you need to do is spend a few more minutes flossing and brushing your teeth. You don’t even have to thread each tooth. Simply sew on that floss into this item.",
     "ingredients": [
-      "Now that handwashing has become a necessity, so should good hygiene. All you need to do is spend a few more minutes flossing and brushing your teeth. You don’t even have to thread each tooth. Simply sew on that floss into this item.",
+      "Plastic",
       "shrimp",
       "octopus",
       "garlic",
       "olive oil"
     ],
     "price": 3500,
-    "allergens": [1, 4]
+    "allergens": [15, 4]
   },
   {
-    "id": 10,
+    "id": 8,
     "name": "Making Toast with Musk",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/NEW-INVENTIONS-5e71f65ab2cf3__880_img_6004744fa2cb2.jpg",
+    "description": "When you become an entrepreneurial multimillionaire before reaching the age of 30, it seems everyone would want a piece of you. Literally, they’d have you stamped on every toast. Visitors would be well-warned how much we’re avid fans of the CEO of SpaceX.",
     "ingredients": [
-      "When you become an entrepreneurial multimillionaire before reaching the age of 30, it seems everyone would want a piece of you. Literally, they’d have you stamped on every toast. Visitors would be well-warned how much we’re avid fans of the CEO of SpaceX.",
+      "Plastic",
       "garlic",
       "tuna",
       "lime",
       "olive oil"
     ],
     "price": 3200,
-    "allergens": [1, 4]
+    "allergens": [15, 19, 20]
   },
   
   {
-    "id": 10,
+    "id": 9,
     "name": "On A Diet",
     "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/06_08_2018_09_26_28_1003213-e1585645568341_img_60047450c8739.jpg",
+    "description": "People who are sticking to a specific calorie intake per day would love this basic necessity: bottled water advertised as diet water! We have always known that water bottles never had calories in them, but hey, we’d pay a few dollars more to comply with our diet.",
     "ingredients": [
-      "People who are sticking to a specific calorie intake per day would love this basic necessity: bottled water advertised as diet water! We have always known that water bottles never had calories in them, but hey, we’d pay a few dollars more to comply with our diet.",
+      "Plastic",
       "garlic",
       "tuna",
       "lime",
       "olive oil"
     ],
     "price": 3200,
-    "allergens": [1, 4]
+    "allergens": [15]
+  },
+  {
+    "id": 10,
+    "name": "Butter Stick",
+    "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/hai-huoc_giaoduc.net_.vn_.2_copy_img_6004745480076.jpg",
+    "description": "Now, for all of the harebrained inventions we’ve seen, we happen to think this one is crafty! Now you don’t have to use or wash knives, simply turn the knob and rub the butter over the bread slice. Wouldn’t it be worth the dollar purchase?",
+    "ingredients": [
+      "Plastic",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [15]
+  },
+  {
+    "id": 11,
+    "name": "Eye Sore",
+    "imgUrl":"https://travelerdoor.com/wp-content/uploads/2021/01/media-141042085868466200-e1585644942951_img_60047457ec7c4.jpg",
+    "description": "Is there truly anyone among us who’s a pro at getting eyedrops in their eyes without cringing or blinking? You’d think that accuracy of target is the problem when you’re using eyedrops. That’s probably why you’re wasting milliliters of them. So someone attached funnels on eyeglasses.",
+    "ingredients": [
+      "Plastic",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [15]
+  },
+  {
+    "id": 12,
+    "name": "The Remote Wrangler",
+    "imgUrl":"https://i0.wp.com/gritdaily.com/wp-content/uploads/2020/01/zykdskujapmgc6i1ndzf.jpg?w=500&ssl=1",
+    "description": "Honey! Where’s the remote? I told you not to move it!! It’s an argument that has threatened marriages and relationships since the dawn of television. “Where the Hell is that remote?",
+    "ingredients": [
+      "Plastic",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [15, 16, 10]
+  },
+  {
+    "id": 13,
+    "name": "Noodle Eater’s Hair Guard",
+    "imgUrl":"http://marketing-assets.avvo.com/uploads/sites/3/2010/11/tumblr_l869mdtznX1qzflvuo1_500-226x300.jpg",
+    "description": "It’s so difficult to keep one’s hair out of one’s noodles, isn’t it? And it’s not as if it’s easy to keep one’s hair from falling in one’s food in a hundred different ways, since barrettes, elastic bands, headbands, and the like are extremely difficult to come by, unwieldy, and hard to use. It’s obviously much easier to put this thing around your head.",
+    "ingredients": [
+      "Plastic",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [15, 4]
+  },
+  {
+    "id": 14,
+    "name": "Bagett Backpack",
+    "imgUrl":"https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_730,h_730/at%2Fnews-culture%2F2019-11%2FBaquettePack-small-1120x1120",
+    "description": "Have you ever wished for a backpack the perfect shape and size to hold a baguette? How about a tiny, portable urinal for your outdoor bathroom breaks? Or a locker just for your socks? Are you not relating to this infomercial? Welcome to Unnecessary Inventions, a series of brilliant gadgets that solve problems most of us have never had.",
+    "ingredients": [
+      "Plastic",
+      "garlic",
+      "tuna",
+      "lime",
+      "olive oil"
+    ],
+    "price": 3200,
+    "allergens": [15, 4]
   }
 
 ]
