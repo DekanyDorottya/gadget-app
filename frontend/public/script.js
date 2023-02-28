@@ -31,7 +31,7 @@ rootElement.insertAdjacentHTML(
 `
 );
 
-rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
+rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
 formElement.insertAdjacentHTML("beforeend",
   `<form id="packageForm" class="packageForm" name="packageForm">
