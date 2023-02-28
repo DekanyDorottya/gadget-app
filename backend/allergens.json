@@ -1,38 +1,83 @@
 [
   {
     "id": 1,
-    "name": "gluten"
+    "name": "Acrylic"
   },
   {
     "id": 2,
-    "name": "lactose"
+    "name": "Aluminum"
   },
   {
     "id": 3,
-    "name": "eggs"
+    "name": "Bamboo"
   },
   {
     "id": 4,
-    "name": "seafood"
+    "name": "Brass"
   },
   {
     "id": 5,
-    "name": "peanut"
+    "name": "Bronze"
   },
   {
     "id": 6,
-    "name": "soybeans"
+    "name": "Carbon Steel"
   },
   {
     "id": 7,
-    "name": "wheat"
+    "name": "Cast Iron"
   },
   {
     "id": 8,
-    "name": "milk"
+    "name": "Ceramic"
   },
   {
     "id": 9,
-    "name": "almond"
+    "name": "Chrome"
+  },
+  {
+    "id": 10,
+    "name": "Cloth"
+  },
+  {
+    "id": 11,
+    "name": "Copper"
+  },
+  {
+    "id": 12,
+    "name": "Fabric"
+  },
+  {
+    "id": 13,
+    "name": "Glass"
+  },
+  {
+    "id": 14,
+    "name": "Metal"
+  },
+  {
+    "id": 15,
+    "name": "Plastic"
+  },
+  {
+    "id": 16,
+    "name": "Polyester"
+  },
+  {
+    "id": 17,
+    "name": "Silicone"
+  },
+  {
+    "id": 18,
+    "name": "Wood"
+  },
+  {
+    "id": 19,
+    "name": "Stainless Steel"
+  },
+  {
+    "id": 20,
+    "name": "Not Specified"
   }
+
 ]
