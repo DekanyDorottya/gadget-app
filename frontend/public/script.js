@@ -21,6 +21,20 @@ rootElement.insertAdjacentHTML(
 `
 );
 
+rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
+let formElement = document.getElementById("form")
+formElement.insertAdjacentHTML("beforeend", 
+`<form id="packageForm" class="packageForm" name="packageForm">
+<div><input id="customerName" type="text" name="customerName"></div>
+<div><input id="email" type="text" name="email"></div>
+<div id="adress">
+Adress
+<div><input id="city" type="text" name="city"></div>
+<div><input id="street" type="text" name="street"></div>
+</div>
+</form>`
+)
+
 const elementOfAllThePizzas = document.getElementById("pizzas");
 
 function createElementForPizza(pizza) {
