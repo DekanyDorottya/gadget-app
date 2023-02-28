@@ -1,3 +1,9 @@
+// cart format:
+//
+//  [{id: 1, amount: 2}
+//   {id: 8, amount: 1}],
+const cart = [];
+
 const rootElement = document.getElementById("root");
 rootElement.insertAdjacentHTML(
   "beforeend",
@@ -15,18 +21,41 @@ rootElement.insertAdjacentHTML(
 `
 );
 
+rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
+let formElement = document.getElementById("form")
+formElement.insertAdjacentHTML("beforeend", 
+`<form id="packageForm" class="packageForm" name="packageForm">
+<div><input id="customerName" type="text" name="customerName"></div>
+<div><input id="email" type="text" name="email"></div>
+<div id="adress">
+Adress
+<div><input id="city" type="text" name="city"></div>
+<div><input id="street" type="text" name="street"></div>
+</div>
+</form>`
+)
+
+let packageFormElement = document.getElementById("packageForm")
 const elementOfAllThePizzas = document.getElementById("pizzas");
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
     "beforeend",
-    `<div class="item" id="${pizza}">
-        <div class="name">${pizza}</div>
-        <button class="addBtn" id="${pizza}AddBtn">add</button>
-        <input class="amountBtn" id="${pizza}AmountBtn">amount</input> 
+    `<div class="item" id="${pizza.name}">
+        <div class="name">${pizza.name}</div>
+        <button class="addBtn" id="${pizza.name}AddBtn">add</button>
+        <input class="amountBtn" id="${pizza.name}AmountBtn">amount</input> 
     </div>`
   );
+
+  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
+    handleAddToCart(pizza.id)
+  })
 }
+
+document.getElementById("cart").addEventListener("click", function() {
+  packageFormElement.classList.remove("packageForm")
+})
 
 function createElementForPizzaAllergents(allergen, pizzaId) {
   document
@@ -40,11 +69,22 @@ function createOptionsForAllergens(allergen) {
     .insertAdjacentHTML("beforeend", `<option value="${allergen}">`);
 }
 
-function createElementForImage(pizzaId, url){
-  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin", 
-  `<div class="image"><img src="${url}" width="200" height="300"></div>`)
-  
+function createElementForImage(pizzaId, url) {
+  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin",
+    `<div class="image"><img src="${url}" width="200" height="300"></div>`)
+
+}
+
+function handleAddToCart(pizzaId) {
+  let cartItemList = cart.filter((item) => item.id === pizzaId)
+
+  if (cartItemList.length === 0) {
+    cart.push({ id: pizzaId, amount: 1 })
+  } else {
+    cartItemList[0].amount += 1;
   }
+  console.log("cart", cart)
+}
 
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
@@ -54,7 +94,7 @@ async function fetchPizzas() {
   const allergens = await res.json();
 
   pizzas.forEach((pizza) => {
-    createElementForPizza(pizza.name);
+    createElementForPizza(pizza);
     createElementForImage(pizza.name, pizza.imgUrl)
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
@@ -100,11 +140,13 @@ async function sendFormData() {
 
   const res = await fetch("http://127.0.0.1:9001/api/order", {
     method: 'post',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ "user": {
-      "email" : "email",
-      "password" : "password"
-    }}),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "user": {
+        "email": "email",
+        "password": "password"
+      }
+    }),
   });
   const response = await res.json();
 
