@@ -36,10 +36,11 @@ rootElement.insertAdjacentHTML(
 `
 );
 
+
 rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
 formElement.insertAdjacentHTML("beforeend",
-  `<form id="packageForm" class="packageForm" name="packageForm">
+  `<form id="packageForm" class="packageForm" name="packageForm" action="/api/order" method="get">
 <div><input id="customerName" type="text" name="customerName"></div>
 <div><input id="email" type="text" name="email"></div>
 <div id="adress">
@@ -51,12 +52,14 @@ Adress
 </form>`
 );
 
+
 let packageFormElement = document.getElementById("packageForm");
 const elementOfAllThePizzas = document.getElementById("pizzas");
 let customerNameElement = document.getElementById("customerName")
 let emailElement = document.getElementById("email")
 let cityElement = document.getElementById("city")
 let streetElement = document.getElementById("street")
+
 
 
 function createElementForPizza(pizza) {
@@ -88,6 +91,7 @@ packageFormElement.addEventListener("submit", function (event) {
   cart.customer.address.city = cityElement.value
   cart.customer.address.street = streetElement.value
   cart.date = generateCurrentDate()
+  sendFormData()
   console.log(cart)
 })
 
@@ -190,7 +194,7 @@ async function fetchPizzas() {
                       .insertAdjacentHTML(
                         "beforeend",
                         `<div class="name">${allerg.name}</div>`
-                      ); 
+                      );
                   }
                 });
               }
@@ -204,23 +208,13 @@ async function fetchPizzas() {
 fetchPizzas();
 
 async function sendFormData() {
-  /* const myData = document.getElementById("myData");
-  const formData = new FormData(myData);
-
-  const obj = Object.fromEntries(formData); */
-
   const res = await fetch("http://127.0.0.1:9001/api/order", {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user: {
-        email: "email",
-        password: "password",
-      },
-    }),
+    body: JSON.stringify(cart),
   });
   const response = await res.json();
 
   console.log(response);
 }
-sendFormData();
+// sendFormData();
