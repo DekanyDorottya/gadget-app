@@ -1,8 +1,54 @@
+//form:
+/* {
+  id: 1,
+  pizzas: [
+    {id: 1, amount: 2}
+  ],
+  date: {
+    year: 2022,
+   month: 6,
+   day: 7,
+   hour: 18,
+   minute: 47
+  }
+  customer: {
+    name: "John Doe",
+    email: "jd@example.com",
+    address: {
+      city: "Palermo",
+      street: "Via Appia 6"
+    }
+  }
+} */
+
+
 // cart format:
 //
 //  [{id: 1, name: "Dry Feet", amount: 2}
 //   {id: 8, name: "Making Toast with Musk", amount: 1}],
-const cart = [];
+let cart = [];
+let form = [{
+  /* id: 0, */
+  pizzas: /* [
+    {id: 1, amount: 2}
+  ] */cart,
+  date: {
+   year: 0,
+   month: 0,
+   day: 0,
+   hour: 0,
+   minute: 0
+  },
+  customer: {
+    name: "",
+    email: "",
+    address: {
+      city: "",
+      street: ""
+    }
+  }
+}];
+
 
 const rootElement = document.getElementById("root");
 rootElement.insertAdjacentHTML(
@@ -82,7 +128,6 @@ document.getElementById("cart").addEventListener("click", function() {
     <div id="itemAmount">amount: ${item.amount}</div>
     </div>
   `)
-
 
     console.log('id', item.id);
     console.log('amount', item.amount);
@@ -212,6 +257,17 @@ async function fetchPizzas() {
   filterPizzasByAllergent();
 }
 fetchPizzas();
+
+packageFormElement.addEventListener("submit", function (event) {
+  event.preventDefault()
+
+  form[0].date = generateCurrentDate();
+  form[0].customer.name = customerNameElement.value;
+  form[0].customer.email = emailElement.value;
+  form[0].customer.address.city = cityElement.value;
+  form[0].customer.address.street = streetElement.value;
+  console.log('form', form);
+})
 
 async function sendFormData() {
   /* const myData = document.getElementById("myData");
