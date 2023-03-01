@@ -54,14 +54,16 @@ const rootElement = document.getElementById("root");
 rootElement.insertAdjacentHTML(
   "beforeend",
   `
-<div id="headline" class="main">
+<div id="fixed" class="main"><div id="headline" class="main">
 
     
-        <input list="filter" name="allergens" id="allergens" placeholder="filter by allergens" onfocus="this.value=''" onchange="this.blur();">
+        <input list="filter" name="allergens" id="allergens" onfocus="this.value=''" onchange="this.blur();" placeholder="choose material">
         <datalist id="filter"></datalist>
 
-        <button id="cart">cart</button>
+        <span id="cart" class="material-symbols-outlined">shopping_cart</span>
 
+        
+</div>
 </div>
 <div id="pizzas" class="main"></div>
 <div id="footer" class="main"></div>
@@ -72,14 +74,14 @@ rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
 formElement.insertAdjacentHTML("beforeend",
   `<form id="packageForm" class="packageForm" name="packageForm">
-<div><input id="customerName" type="text" name="customerName"></div>
-<div><input id="email" type="text" name="email"></div>
+<div><input id="customerName" type="text" name="customerName" placeholder="name"></div>
+<div><input id="email" type="text" name="email" placeholder="email"></div>
 <div id="address">
 Address
-<div><input id="city" type="text" name="city"></div>
-<div><input id="street" type="text" name="street"></div>
+<div><input id="city" type="text" name="city" placeholder="city"></div>
+<div><input id="street" type="text" name="street" placeholder="street"></div>
 </div>
-<div><input type="submit" value="Save Package"/></div>
+<div><input type="submit" value="Order"/></div>
 </form>`
 );
 
@@ -101,8 +103,10 @@ function createElementForPizza(pizza) {
     "beforeend",
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
-        <button class="addBtn" id="${pizza.name}AddBtn">add</button>
-        <input class="amountBtn" id="${pizza.name}AmountBtn">amount</input> 
+
+        <div id="add"><span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span></div>
+        
+        
     </div>`
   );
 
@@ -146,7 +150,7 @@ console.log(cartContentElement);
 function createElementForPizzaAllergents(allergen, pizzaId) {
   document
     .getElementById(pizzaId)
-    .insertAdjacentHTML("beforeend", `<div class="name">${allergen}</div>`);
+    .insertAdjacentHTML("beforeend", `<div class="material">${allergen}</div>`);
 }
 
 function createOptionsForAllergens(allergen) {
