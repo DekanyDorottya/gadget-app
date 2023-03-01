@@ -4,7 +4,7 @@
 //   {id: 8, amount: 1}],
 const cart = {
   pizzas: [],
-  date: generateCurrentDate(),
+  date: 0,
   customer: {
     name: "",
     email: "",
@@ -87,6 +87,7 @@ packageFormElement.addEventListener("submit", function (event) {
   cart.customer.email = emailElement.value
   cart.customer.address.city = cityElement.value
   cart.customer.address.street = streetElement.value
+  cart.date = generateCurrentDate()
   console.log(cart)
 })
 
