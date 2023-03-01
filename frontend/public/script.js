@@ -22,10 +22,10 @@ rootElement.insertAdjacentHTML(
 `
 );
 
-rootElement.insertAdjacentHTML("beforeend", `<div id="form"></div>`)
+rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
-formElement.insertAdjacentHTML("beforeend", 
-`<form id="packageForm" class="packageForm" name="packageForm">
+formElement.insertAdjacentHTML("beforeend",
+  `<form id="packageForm" class="packageForm" name="packageForm">
 <div><input id="customerName" type="text" name="customerName"></div>
 <div><input id="email" type="text" name="email"></div>
 <div id="address">
@@ -33,14 +33,20 @@ Address
 <div><input id="city" type="text" name="city"></div>
 <div><input id="street" type="text" name="street"></div>
 </div>
+<div><input type="submit" value="Save Package"/></div>
 </form>`
-)
+);
 
 
 
 const packageFormElement = document.getElementById("packageForm");
 
 const elementOfAllThePizzas = document.getElementById("pizzas");
+let customerNameElement = document.getElementById("customerName")
+let emailElement = document.getElementById("email")
+let cityElement = document.getElementById("city")
+let streetElement = document.getElementById("street")
+
 
 let itemsInCart = [];
 
@@ -105,12 +111,18 @@ function createOptionsForAllergens(allergen) {
 }
 
 function createDivForAddedItems(addedItem) {
-  document.getElementById('itemName').insertAdjacentHTML('beforeend', `<div id="${addedItem}"></div>`);
+  document
+    .getElementById("itemName")
+    .insertAdjacentHTML("beforeend", `<div id="${addedItem}"></div>`);
 }
 
 function createElementForImage(pizzaId, url) {
-  document.getElementById(pizzaId).insertAdjacentHTML("afterbegin",
-    `<div class="image"><img src="${url}" width="200" height="300"></div>`)
+  document
+    .getElementById(pizzaId)
+    .insertAdjacentHTML(
+      "afterbegin",
+      `<div class="image"><img src="${url}" width="200" height="300"></div>`
+    );
 }
 
 
@@ -127,6 +139,25 @@ function handleAddToCart(pizzaId, pizzaName) {
   console.log("cart", cart)
 }
 
+function generateCurrentDate() {
+
+  const currentDate = new Date().toJSON().slice(0, 10)
+  const currentMinSec = new Date().toJSON().slice(11, 16)
+  let split = currentDate.split("-")
+  let splitMinSec = currentMinSec.split(":")
+  const date = {
+    year: split[0],
+    month: split[1],
+    day: split[2],
+    hour: splitMinSec[0],
+    minute: splitMinSec[1]
+  }
+  // console.log(currentMinSec)
+  return date
+
+}
+
+
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
   const pizzas = await response.json();
@@ -136,7 +167,7 @@ async function fetchPizzas() {
 
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
-    createElementForImage(pizza.name, pizza.imgUrl)
+    createElementForImage(pizza.name, pizza.imgUrl);
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
@@ -154,13 +185,22 @@ async function fetchPizzas() {
       .addEventListener("change", function (event) {
         allergens.forEach((allergen) => {
           if (allergen.name === event.target.value) {
+            console.log("allergen.name", allergen.name);
+            console.log("event.target.value", event.target.value);
             document.getElementById("pizzas").replaceChildren();
             pizzas.filter((pizza) => {
-              if (!pizza.allergens.includes(allergen.id)) {
-                createElementForPizza(pizza.name);
+              if (pizza.allergens.includes(allergen.id)) {
+                createElementForPizza(pizza);
+                createElementForImage(pizza.name, pizza.imgUrl);
                 allergens.forEach((allerg) => {
                   if (pizza.allergens.includes(allerg.id)) {
-                    createElementForPizzaAllergents(allerg.name, pizza.name);
+                    console.log("tartalmazza");
+                    document
+                      .getElementById(pizza.name)
+                      .insertAdjacentHTML(
+                        "beforeend",
+                        `<div class="name">${allerg.name}</div>`
+                      ); 
                   }
                 });
               }
@@ -173,9 +213,6 @@ async function fetchPizzas() {
 }
 fetchPizzas();
 
-
-
-
 async function sendFormData() {
   /* const myData = document.getElementById("myData");
   const formData = new FormData(myData);
@@ -183,13 +220,13 @@ async function sendFormData() {
   const obj = Object.fromEntries(formData); */
 
   const res = await fetch("http://127.0.0.1:9001/api/order", {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
+    method: "post",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      "user": {
-        "email": "email",
-        "password": "password"
-      }
+      user: {
+        email: "email",
+        password: "password",
+      },
     }),
   });
   const response = await res.json();
