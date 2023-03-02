@@ -1,3 +1,12 @@
+function main(){
+  fetchPizzas();
+ createFilterInputAndShoppingButton()
+ createForm()
+ displayCartContentWhenClickCartButton()
+}
+
+
+
 //form:
 /* {
   id: 1,
@@ -48,9 +57,15 @@ let form = {
     }
   }
 };
-
-
 const rootElement = document.getElementById("root");
+rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
+let formElement = document.getElementById("form")
+
+
+
+
+function createFilterInputAndShoppingButton(){
+
 rootElement.insertAdjacentHTML(
   "beforeend",
   `
@@ -68,11 +83,11 @@ rootElement.insertAdjacentHTML(
 <div id="pizzas" class="main"></div>
 <div id="footer" class="main"></div>
 `
-);
+)
+};
 
+function createForm(){
 
-rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
-let formElement = document.getElementById("form")
 formElement.insertAdjacentHTML("beforeend",
 `
 <form id="packageForm" class="packageForm" name="packageForm">
@@ -87,7 +102,8 @@ Address
 <div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
 );
-
+}
+main()
 
 
 const packageFormElement = document.getElementById("packageForm");
@@ -133,7 +149,7 @@ document
 
 
 
-
+function displayCartContentWhenClickCartButton(){
 document.getElementById("cart").addEventListener("click", function() {
   packageFormElement.classList.remove("packageForm");
   console.log('cart', cart)
@@ -161,18 +177,9 @@ document.getElementById("cart").addEventListener("click", function() {
     el.style.display = "none";
   })
 })
+}
 
-// packageFormElement.addEventListener("submit", function (event) {
-//   event.preventDefault()
 
-//   cart.customer.name = customerNameElement.value
-//   cart.customer.email = emailElement.value
-//   cart.customer.address.city = cityElement.value
-//   cart.customer.address.street = streetElement.value
-//   cart.date = generateCurrentDate()
-//   sendFormData()
-//   console.log(form)
-// })
 const cartContentElement = document.getElementById("cartContent");
 console.log(cartContentElement);
 
@@ -308,7 +315,7 @@ async function fetchPizzas() {
   }
   filterPizzasByAllergent();
 }
-fetchPizzas();
+
 
 packageFormElement.addEventListener("submit", function (event) {
   event.preventDefault()
