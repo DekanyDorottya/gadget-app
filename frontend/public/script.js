@@ -34,13 +34,21 @@ function createFilterInputAndShoppingButton() {
     `
 <div id="fixed" class="main"><div id="headline" class="main">
 
+        <div class="container">
+        <h2 class="title">
+          <span class="title-word title-word-1">Very</span>
+          <span class="title-word title-word-2">premium</span>
+          <span class="title-word title-word-3">useful</span>
+          <span class="title-word title-word-4">gadgets</span>
+        </h2>
+        </div>
     
         <input list="filter" name="allergens" id="allergens" onfocus="this.value=''" onchange="this.blur();" placeholder="choose material">
         <datalist id="filter"></datalist>
 
-        <span id="cart" class="material-symbols-outlined">shopping_cart</span>
+        <span id="cart" class="material-symbols-outlined">shopping_cart</span></br>
 
-        
+
 </div>
 </div>
 <div id="pizzas" class="main"></div>
@@ -55,12 +63,12 @@ function createForm() {
     `
 <form id="packageForm" class="packageForm" name="packageForm">
 <div id="orderFormTitle">Checkout</div>
-<div><input id="customerName" type="text" name="customerName" placeholder="name"></div>
-<div><input id="email" type="text" name="email" placeholder="email"></div>
+<div><input id="customerName" type="text" name="customerName" placeholder="name" required></div>
+<div><input id="email" type="email" name="email" placeholder="email" required></div>
 <div id="address">
 Address
-<div><input id="city" type="text" name="city" placeholder="city"></div>
-<div><input id="street" type="text" name="street" placeholder="street"></div>
+<div><input id="city" type="text" name="city" placeholder="city" required></div>
+<div><input id="street" type="text" name="street" placeholder="street" required></div>
 </div>
 <div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
@@ -286,8 +294,16 @@ packageFormElement.addEventListener('submit', function (event) {
   form.customer.email = emailElement.value;
   form.customer.address.city = cityElement.value;
   form.customer.address.street = streetElement.value;
-  console.log('form', form);
   sendFormData();
+
+  rootElement.replaceChildren();
+  rootElement.insertAdjacentHTML(
+    'beforeend',
+    `<div id="thanksMessage">
+  <span class="text1"> Thank you </span>
+  <span class="text2"> for ordering! </span>
+  </div>`
+  );
 });
 
 async function sendFormData() {
