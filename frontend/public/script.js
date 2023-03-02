@@ -73,7 +73,9 @@ rootElement.insertAdjacentHTML(
 rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
 formElement.insertAdjacentHTML("beforeend",
-  `<form id="packageForm" class="packageForm" name="packageForm">
+`
+<form id="packageForm" class="packageForm" name="packageForm">
+<div id="orderFormTitle">Checkout</div>
 <div><input id="customerName" type="text" name="customerName" placeholder="name"></div>
 <div><input id="email" type="text" name="email" placeholder="email"></div>
 <div id="address">
@@ -81,7 +83,7 @@ Address
 <div><input id="city" type="text" name="city" placeholder="city"></div>
 <div><input id="street" type="text" name="street" placeholder="street"></div>
 </div>
-<div><input type="submit" value="Order"/></div>
+<div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
 );
 
@@ -111,7 +113,7 @@ function createElementForPizza(pizza) {
   );
 
   document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
-    handleAddToCart(pizza.id, pizza.name);
+    handleAddToCart(pizza.id, pizza.name, pizza.price);
   })
 }
 //console.log('cart', cart)
@@ -124,18 +126,22 @@ document.getElementById("cart").addEventListener("click", function() {
   packageFormElement.classList.remove("packageForm");
   console.log('cart', cart)
   itemsInCart.push(cart);
+  formElement.insertAdjacentHTML('afterbegin', `<div id="cartContent" class="cartContent"><div id="cartTitle">Shopping Cart</div></div>`);
+  const cartContentElement = document.getElementById('cartContent');
   itemsInCart[0].forEach(item => {
 
-  rootElement.insertAdjacentHTML('afterbegin', `
-    <div id="cartContent" class="cartContent">
-    <div id="itemName">item: ${item.name}<div>
-    <div id="itemAmount">amount: ${item.amount}</div>
-    </div>
-  `)
-
-    console.log('id', item.id);
-    console.log('amount', item.amount);
+    cartContentElement.insertAdjacentHTML('beforeend', `
+    <div id="itemName">item: <b>${item.name}</b><div>
+    <div id="itemAmount">amount: <b>${item.amount}</b></div>
+    <div id="priceInCart">price: <b>${item.price} € * ${item.amount}</b></div>`)
+    
   })
+
+  const prices = [];
+  itemsInCart[0].forEach(item => prices.push(item.price));
+  const totalPrice = prices.reduce((a,b) => a + b);
+  cartContentElement.insertAdjacentHTML('beforeend', `<div id="totalPrice"><div id="totalPriceTitle">Total price</div><div id="total"><b>${totalPrice} €</b></div></div>`)
+
 
   const mainElements = document.getElementsByClassName('main');
   console.log(mainElements);
@@ -176,11 +182,11 @@ function createElementForImage(pizzaId, url) {
 
 
 
-function handleAddToCart(pizzaId, pizzaName) {
+function handleAddToCart(pizzaId, pizzaName, pizzaPrice) {
   let cartItemList = cart.filter((item) => item.id === pizzaId)
 
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, name: pizzaName, amount: 1 })
+    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice})
   } else {
     cartItemList[0].amount += 1;
   }
@@ -217,6 +223,7 @@ async function fetchPizzas() {
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
     createElementForImage(pizza.name, pizza.imgUrl);
+    document.getElementById(`${pizza.name}`).insertAdjacentHTML(`beforeend`, `<div id="price">${pizza.price} €</div>`);
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
