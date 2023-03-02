@@ -27,7 +27,7 @@
 //  [{id: 1, name: "Dry Feet", amount: 2}
 //   {id: 8, name: "Making Toast with Musk", amount: 1}],
 let cart = [];
-let form = [{
+let form = {
   /* id: 0, */
   pizzas: /* [
     {id: 1, amount: 2}
@@ -47,7 +47,7 @@ let form = [{
       street: ""
     }
   }
-}];
+};
 
 
 const rootElement = document.getElementById("root");
@@ -69,6 +69,7 @@ rootElement.insertAdjacentHTML(
 <div id="footer" class="main"></div>
 `
 );
+
 
 rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
@@ -144,6 +145,17 @@ document.getElementById("cart").addEventListener("click", function() {
   })
 })
 
+// packageFormElement.addEventListener("submit", function (event) {
+//   event.preventDefault()
+
+//   cart.customer.name = customerNameElement.value
+//   cart.customer.email = emailElement.value
+//   cart.customer.address.city = cityElement.value
+//   cart.customer.address.street = streetElement.value
+//   cart.date = generateCurrentDate()
+//   sendFormData()
+//   console.log(form)
+// })
 const cartContentElement = document.getElementById("cartContent");
 console.log(cartContentElement);
 
@@ -249,7 +261,7 @@ async function fetchPizzas() {
                       .insertAdjacentHTML(
                         "beforeend",
                         `<div class="name">${allerg.name}</div>`
-                      ); 
+                      );
                   }
                 });
               }
@@ -265,32 +277,23 @@ fetchPizzas();
 packageFormElement.addEventListener("submit", function (event) {
   event.preventDefault()
 
-  form[0].date = generateCurrentDate();
-  form[0].customer.name = customerNameElement.value;
-  form[0].customer.email = emailElement.value;
-  form[0].customer.address.city = cityElement.value;
-  form[0].customer.address.street = streetElement.value;
+  form.date = generateCurrentDate();
+  form.customer.name = customerNameElement.value;
+  form.customer.email = emailElement.value;
+  form.customer.address.city = cityElement.value;
+  form.customer.address.street = streetElement.value;
   console.log('form', form);
+  sendFormData()
 })
 
 async function sendFormData() {
-  /* const myData = document.getElementById("myData");
-  const formData = new FormData(myData);
-
-  const obj = Object.fromEntries(formData); */
-
   const res = await fetch("http://127.0.0.1:9001/api/order", {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user: {
-        email: "email",
-        password: "password",
-      },
-    }),
+    body: JSON.stringify(form),
   });
   const response = await res.json();
 
   console.log(response);
 }
-sendFormData();
+// sendFormData();
