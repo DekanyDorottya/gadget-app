@@ -216,9 +216,12 @@ console.log(itemAmountElement);
     itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) + 1
     
   }
-
-  console.log('cart', cart);
+  
+  console.log("cart", cart)
 }
+
+
+
 
 function handleSubtractToCart(pizzaId, pizzaName) {
 
@@ -338,4 +341,3 @@ async function sendFormData() {
 
   console.log(response);
 }
-// sendFormData();
