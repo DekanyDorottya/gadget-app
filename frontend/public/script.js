@@ -1,11 +1,9 @@
-function main(){
+function main() {
   fetchPizzas();
- createFilterInputAndShoppingButton()
- createForm()
- displayCartContentWhenClickCartButton()
+  createFilterInputAndShoppingButton();
+  createForm();
+  displayCartContentWhenClickCartButton();
 }
-
-
 
 //form:
 /* {
@@ -30,7 +28,6 @@ function main(){
   }
 } */
 
-
 // cart format:
 //
 //  [{id: 1, name: "Dry Feet", amount: 2}
@@ -40,56 +37,60 @@ let form = {
   /* id: 0, */
   pizzas: /* [
     {id: 1, amount: 2}
-  ] */cart,
+  ] */ cart,
   date: {
-   year: 0,
-   month: 0,
-   day: 0,
-   hour: 0,
-   minute: 0
+    year: 0,
+    month: 0,
+    day: 0,
+    hour: 0,
+    minute: 0,
   },
   customer: {
     name: "",
     email: "",
     address: {
       city: "",
-      street: ""
-    }
-  }
+      street: "",
+    },
+  },
 };
 const rootElement = document.getElementById("root");
-rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
-let formElement = document.getElementById("form")
+rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`);
+let formElement = document.getElementById("form");
 
-
-
-
-function createFilterInputAndShoppingButton(){
-
-rootElement.insertAdjacentHTML(
-  "beforeend",
-  `
+function createFilterInputAndShoppingButton() {
+  rootElement.insertAdjacentHTML(
+    "beforeend",
+    `
 <div id="fixed" class="main"><div id="headline" class="main">
 
+        <div class="container">
+        <h2 class="title">
+          <span class="title-word title-word-1">Very</span>
+          <span class="title-word title-word-2">premium</span>
+          <span class="title-word title-word-3">useful</span>
+          <span class="title-word title-word-4">gadgets</span>
+        </h2>
+        </div>
     
         <input list="filter" name="allergens" id="allergens" onfocus="this.value=''" onchange="this.blur();" placeholder="choose material">
         <datalist id="filter"></datalist>
 
-        <span id="cart" class="material-symbols-outlined">shopping_cart</span>
+        <span id="cart" class="material-symbols-outlined">shopping_cart</span></br>
 
-        
+
 </div>
 </div>
 <div id="pizzas" class="main"></div>
 <div id="footer" class="main"></div>
 `
-)
-};
+  );
+}
 
-function createForm(){
-
-formElement.insertAdjacentHTML("beforeend",
-`
+function createForm() {
+  formElement.insertAdjacentHTML(
+    "beforeend",
+    `
 <form id="packageForm" class="packageForm" name="packageForm">
 <div id="orderFormTitle">Checkout</div>
 <div><input id="customerName" type="text" name="customerName" placeholder="name" required></div>
@@ -101,25 +102,23 @@ Address
 </div>
 <div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
-);
+  );
 }
-main()
-
+main();
 
 const packageFormElement = document.getElementById("packageForm");
 
 const elementOfAllThePizzas = document.getElementById("pizzas");
-let customerNameElement = document.getElementById("customerName")
-let emailElement = document.getElementById("email")
-let cityElement = document.getElementById("city")
-let streetElement = document.getElementById("street")
-
+let customerNameElement = document.getElementById("customerName");
+let emailElement = document.getElementById("email");
+let cityElement = document.getElementById("city");
+let streetElement = document.getElementById("street");
 
 let itemsInCart = [];
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
-    'beforeend',
+    "beforeend",
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
         <div id="add"></div>
@@ -135,50 +134,53 @@ function createElementForPizza(pizza) {
   );
 
   document
-  .getElementById(`${pizza.name}AddBtn`)
-  .addEventListener('click', function () {
-    handleAddToCart(pizza.id, pizza.name, pizza.price);
-  });
+    .getElementById(`${pizza.name}AddBtn`)
+    .addEventListener("click", function () {
+      handleAddToCart(pizza.id, pizza.name, pizza.price);
+    });
 
-document
-  .getElementById(`${pizza.name}MinusBtn`)
-  .addEventListener('click', function () {
-    handleSubtractToCart(pizza.id, pizza.name);
-  });
+  document
+    .getElementById(`${pizza.name}MinusBtn`)
+    .addEventListener("click", function () {
+      handleSubtractToCart(pizza.id, pizza.name);
+    });
 }
 
-
-
-function displayCartContentWhenClickCartButton(){
-document.getElementById("cart").addEventListener("click", function() {
-  packageFormElement.classList.remove("packageForm");
-  console.log('cart', cart)
-  itemsInCart.push(cart);
-  formElement.insertAdjacentHTML('afterbegin', `<div id="cartContent" class="cartContent"><div id="cartTitle">Shopping Cart</div></div>`);
-  const cartContentElement = document.getElementById('cartContent');
-  itemsInCart[0].forEach(item => {
-
-    cartContentElement.insertAdjacentHTML('beforeend', `
+function displayCartContentWhenClickCartButton() {
+  document.getElementById("cart").addEventListener("click", function () {
+    packageFormElement.classList.remove("packageForm");
+    console.log("cart", cart);
+    itemsInCart.push(cart);
+    formElement.insertAdjacentHTML(
+      "afterbegin",
+      `<div id="cartContent" class="cartContent"><div id="cartTitle">Shopping Cart</div></div>`
+    );
+    const cartContentElement = document.getElementById("cartContent");
+    itemsInCart[0].forEach((item) => {
+      cartContentElement.insertAdjacentHTML(
+        "beforeend",
+        `
     <div id="itemName">item: <b>${item.name}</b><div>
     <div id="itemAmount">amount: <b>${item.amount}</b></div>
-    <div id="priceInCart">price: <b>${item.price} € * ${item.amount}</b></div>`)
-    
-  })
+    <div id="priceInCart">price: <b>${item.price} € * ${item.amount}</b></div>`
+      );
+    });
 
-  const prices = [];
-  itemsInCart[0].forEach(item => prices.push(item.price));
-  const totalPrice = prices.reduce((a,b) => a + b);
-  cartContentElement.insertAdjacentHTML('beforeend', `<div id="totalPrice"><div id="totalPriceTitle">Total price</div><div id="total"><b>${totalPrice} €</b></div></div>`)
+    const prices = [];
+    itemsInCart[0].forEach((item) => prices.push(item.price));
+    const totalPrice = prices.reduce((a, b) => a + b);
+    cartContentElement.insertAdjacentHTML(
+      "beforeend",
+      `<div id="totalPrice"><div id="totalPriceTitle">Total price</div><div id="total"><b>${totalPrice} €</b></div></div>`
+    );
 
-
-  const mainElements = document.getElementsByClassName('main');
-  console.log(mainElements);
-  Array.from(mainElements).forEach(el => {
-    el.style.display = "none";
-  })
-})
+    const mainElements = document.getElementsByClassName("main");
+    console.log(mainElements);
+    Array.from(mainElements).forEach((el) => {
+      el.style.display = "none";
+    });
+  });
 }
-
 
 const cartContentElement = document.getElementById("cartContent");
 console.log(cartContentElement);
@@ -210,32 +212,26 @@ function createElementForImage(pizzaId, url) {
     );
 }
 
-
-
 function handleAddToCart(pizzaId, pizzaName, pizzaPrice) {
   let cartItemList = cart.filter((item) => item.id === pizzaId); // ez nem finddal kellett volna ink?
   let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice});
-    itemAmountElement.innerHTML = 1
+    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice });
+    itemAmountElement.innerHTML = 1;
   } else {
     cartItemList[0].amount += 1;
     itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) + 1;
   }
 }
 
-
-
-
 function handleSubtractToCart(pizzaId, pizzaName) {
-
   let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
   for (let i = 0; i < cart.length; i++) {
     //mappal
-    if (cart[i].id === pizzaId ) {
+    if (cart[i].id === pizzaId) {
       cart[i].amount--;
-      if( cart.length > 0){
-        itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) - 1
+      if (cart.length > 0) {
+        itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) - 1;
       }
       if (cart[i].amount === 0) {
         cart.splice(i, 1);
@@ -246,20 +242,19 @@ function handleSubtractToCart(pizzaId, pizzaName) {
 }
 
 function generateCurrentDate() {
-  const currentDate = new Date().toJSON().slice(0, 10)
-  const currentMinSec = new Date().toJSON().slice(11, 16)
-  let split = currentDate.split("-")
-  let splitMinSec = currentMinSec.split(":")
+  const currentDate = new Date().toJSON().slice(0, 10);
+  const currentMinSec = new Date().toJSON().slice(11, 16);
+  let split = currentDate.split("-");
+  let splitMinSec = currentMinSec.split(":");
   const date = {
     year: split[0],
     month: split[1],
     day: split[2],
     hour: splitMinSec[0],
-    minute: splitMinSec[1]
-  }
+    minute: splitMinSec[1],
+  };
   return date;
 }
-
 
 async function fetchPizzas() {
   const response = await fetch("http://127.0.0.1:9001/api/pizza");
@@ -271,7 +266,12 @@ async function fetchPizzas() {
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
     createElementForImage(pizza.name, pizza.imgUrl);
-    document.getElementById(`${pizza.name}`).insertAdjacentHTML(`beforeend`, `<div id="price">${pizza.price} €</div>`);
+    document
+      .getElementById(`${pizza.name}`)
+      .insertAdjacentHTML(
+        `beforeend`,
+        `<div id="price">${pizza.price} €</div>`
+      );
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
@@ -316,9 +316,8 @@ async function fetchPizzas() {
   filterPizzasByAllergent();
 }
 
-
 packageFormElement.addEventListener("submit", function (event) {
-  event.preventDefault()
+  event.preventDefault();
 
   form.date = generateCurrentDate();
   form.customer.name = customerNameElement.value;
@@ -328,12 +327,14 @@ packageFormElement.addEventListener("submit", function (event) {
   sendFormData();
 
   rootElement.replaceChildren();
-  rootElement.insertAdjacentHTML('beforeend',
-  `<div id="thanksMessage">
+  rootElement.insertAdjacentHTML(
+    "beforeend",
+    `<div id="thanksMessage">
   <span class="text1"> Thank you </span>
   <span class="text2"> for ordering! </span>
-  </div>`);
-})
+  </div>`
+  );
+});
 
 async function sendFormData() {
   const res = await fetch("http://127.0.0.1:9001/api/order", {
