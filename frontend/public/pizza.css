@@ -1,6 +1,11 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
     position: relative;
+    height: 100%;
 }
 
 #pizzas {
@@ -56,7 +61,7 @@ img:hover {
     align-items: center;
 }
 
-#cart {
+#cart, #orderBtn {
     margin: 15px;
     padding: 5px;
     background-color: #408EC6;
@@ -65,7 +70,7 @@ img:hover {
     transition: all 0.2s ease-in-out;
 }
 
-#cart:hover {
+#cart:hover, #orderBtn:hover {
     background-color: #95daff;
 }
 
@@ -89,4 +94,60 @@ img:hover {
 
 #allergens {
     margin-left: 10px;
+}
+
+#itemName {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#itemAmount, #priceInCart {
+    font-size: 15px;
+}
+
+.packageForm {
+    margin: 20px;
+}
+
+#form {
+    display: flex;
+    justify-content: center;
+}
+
+#cartTitle, #orderFormTitle {
+    text-align: center;
+    font-size: 30px;
+    margin: 30px 0 30px 0;
+}
+
+#cartContent, #packageForm {
+    margin: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#orderBtn {
+    margin: 15px 0 0 0;
+    float: right;
+    border: none;
+}
+
+#price {
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+}
+
+#totalPrice {
+    font-size: 25px;
+    margin: 40px 0 20px 0;
+}
+
+#totalPriceTitle, #total {
+    text-align: center;
+}
+
+.amount-span {
+    margin-right: 10px;
+    font-weight: bold;
 }

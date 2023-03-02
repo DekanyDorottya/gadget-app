@@ -89,7 +89,9 @@ rootElement.insertAdjacentHTML(
 function createForm(){
 
 formElement.insertAdjacentHTML("beforeend",
-  `<form id="packageForm" class="packageForm" name="packageForm">
+`
+<form id="packageForm" class="packageForm" name="packageForm">
+<div id="orderFormTitle">Checkout</div>
 <div><input id="customerName" type="text" name="customerName" placeholder="name"></div>
 <div><input id="email" type="text" name="email" placeholder="email"></div>
 <div id="address">
@@ -97,7 +99,7 @@ Address
 <div><input id="city" type="text" name="city" placeholder="city"></div>
 <div><input id="street" type="text" name="street" placeholder="street"></div>
 </div>
-<div><input type="submit" value="Order"/></div>
+<div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
 );
 }
@@ -117,22 +119,33 @@ let itemsInCart = [];
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
-
-        <div id="add"><span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span></div>
+        <div id="add"></div>
+        <div id="add">
+        
+        <span id="${pizza.name}Amount" class="amount-span">0</span>
+        <span id="${pizza.name}MinusBtn" class="material-symbols-outlined minusBtn">remove</span>
+        <span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span>
+        </div>
         
         
     </div>`
   );
 
-  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
-    handleAddToCart(pizza.id, pizza.name);
-  })
+  document
+  .getElementById(`${pizza.name}AddBtn`)
+  .addEventListener('click', function () {
+    handleAddToCart(pizza.id, pizza.name, pizza.price);
+  });
+
+document
+  .getElementById(`${pizza.name}MinusBtn`)
+  .addEventListener('click', function () {
+    handleSubtractToCart(pizza.id, pizza.name);
+  });
 }
-//console.log('cart', cart)
-//console.log('itemsInCart', itemsInCart);
 
 
 
@@ -141,18 +154,22 @@ document.getElementById("cart").addEventListener("click", function() {
   packageFormElement.classList.remove("packageForm");
   console.log('cart', cart)
   itemsInCart.push(cart);
+  formElement.insertAdjacentHTML('afterbegin', `<div id="cartContent" class="cartContent"><div id="cartTitle">Shopping Cart</div></div>`);
+  const cartContentElement = document.getElementById('cartContent');
   itemsInCart[0].forEach(item => {
 
-  rootElement.insertAdjacentHTML('afterbegin', `
-    <div id="cartContent" class="cartContent">
-    <div id="itemName">item: ${item.name}<div>
-    <div id="itemAmount">amount: ${item.amount}</div>
-    </div>
-  `)
-
-    console.log('id', item.id);
-    console.log('amount', item.amount);
+    cartContentElement.insertAdjacentHTML('beforeend', `
+    <div id="itemName">item: <b>${item.name}</b><div>
+    <div id="itemAmount">amount: <b>${item.amount}</b></div>
+    <div id="priceInCart">price: <b>${item.price} € * ${item.amount}</b></div>`)
+    
   })
+
+  const prices = [];
+  itemsInCart[0].forEach(item => prices.push(item.price));
+  const totalPrice = prices.reduce((a,b) => a + b);
+  cartContentElement.insertAdjacentHTML('beforeend', `<div id="totalPrice"><div id="totalPriceTitle">Total price</div><div id="total"><b>${totalPrice} €</b></div></div>`)
+
 
   const mainElements = document.getElementsByClassName('main');
   console.log(mainElements);
@@ -195,20 +212,40 @@ function createElementForImage(pizzaId, url) {
 
 
 
-function handleAddToCart(pizzaId, pizzaName) {
-  let cartItemList = cart.filter((item) => item.id === pizzaId)
-
+function handleAddToCart(pizzaId, pizzaName, pizzaPrice) {
+  let cartItemList = cart.filter((item) => item.id === pizzaId); // ez nem finddal kellett volna ink?
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, name: pizzaName, amount: 1 })
+    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice});
+    itemAmountElement.innerHTML = 1
   } else {
     cartItemList[0].amount += 1;
+    itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) + 1;
   }
-  
-  console.log("cart", cart)
+}
+
+
+
+
+function handleSubtractToCart(pizzaId, pizzaName) {
+
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
+  for (let i = 0; i < cart.length; i++) {
+    //mappal
+    if (cart[i].id === pizzaId ) {
+      cart[i].amount--;
+      if( cart.length > 0){
+        itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) - 1
+      }
+      if (cart[i].amount === 0) {
+        cart.splice(i, 1);
+      }
+      break;
+    }
+  }
 }
 
 function generateCurrentDate() {
-
   const currentDate = new Date().toJSON().slice(0, 10)
   const currentMinSec = new Date().toJSON().slice(11, 16)
   let split = currentDate.split("-")
@@ -220,8 +257,7 @@ function generateCurrentDate() {
     hour: splitMinSec[0],
     minute: splitMinSec[1]
   }
-  return date
-
+  return date;
 }
 
 
@@ -235,6 +271,7 @@ async function fetchPizzas() {
   pizzas.forEach((pizza) => {
     createElementForPizza(pizza);
     createElementForImage(pizza.name, pizza.imgUrl);
+    document.getElementById(`${pizza.name}`).insertAdjacentHTML(`beforeend`, `<div id="price">${pizza.price} €</div>`);
     allergens.forEach((allerg) => {
       if (pizza.allergens.includes(allerg.id)) {
         createElementForPizzaAllergents(allerg.name, pizza.name);
@@ -299,7 +336,4 @@ async function sendFormData() {
     body: JSON.stringify(form),
   });
   const response = await res.json();
-
-  console.log(response);
 }
-
