@@ -101,19 +101,33 @@ let itemsInCart = [];
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
-
-        <div id="add"><span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span></div>
+        <div id="add"></div>
+        <div id="add">
+        
+        <span id="${pizza.name}Amount" class="amount-span">amount</span>
+        <span id="${pizza.name}MinusBtn" class="material-symbols-outlined minusBtn">-</span>
+        <span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span>
+        </div>
         
         
     </div>`
   );
 
-  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
+  document
+  .getElementById(`${pizza.name}AddBtn`)
+  .addEventListener('click', function () {
     handleAddToCart(pizza.id, pizza.name);
-  })
+  });
+
+document
+  .getElementById(`${pizza.name}MinusBtn`)
+  .addEventListener('click', function () {
+    handleSubtractToCart(pizza.id, pizza.name);
+    console.log('gitgut');
+  });
 }
 //console.log('cart', cart)
 //console.log('itemsInCart', itemsInCart);
@@ -189,15 +203,46 @@ function createElementForImage(pizzaId, url) {
 
 
 function handleAddToCart(pizzaId, pizzaName) {
-  let cartItemList = cart.filter((item) => item.id === pizzaId)
-
+  let cartItemList = cart.filter((item) => item.id === pizzaId); // ez nem finddal kellett volna ink?
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
+/* let itemAmount = 0
+  itemAmountText = `amount: ${itemAmount}` */;
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, name: pizzaName, amount: 1 })
+    cart.push({ id: pizzaId, name: pizzaName, amount: 1 });
+    itemAmountElement.innerHTML = 1
+console.log(itemAmountElement);
   } else {
     cartItemList[0].amount += 1;
+    itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) + 1
+    
   }
   
   console.log("cart", cart)
+}
+
+
+
+
+function handleSubtractToCart(pizzaId, pizzaName) {
+
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
+  for (let i = 0; i < cart.length; i++) {
+    //mappal
+    if (cart[i].id === pizzaId ) {
+      console.log('sasf');
+      cart[i].amount--;
+      if( cart.length > 0){
+
+        itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) - 1
+      }
+      if (cart[i].amount === 0) {
+        cart.splice(i, 1);
+      }
+      break;
+    }
+  }
+
+  console.log('cart', cart);
 }
 
 function generateCurrentDate() {
@@ -296,4 +341,3 @@ async function sendFormData() {
 
   console.log(response);
 }
-// sendFormData();
