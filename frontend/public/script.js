@@ -109,8 +109,8 @@ function createElementForPizza(pizza) {
         <div id="add"></div>
         <div id="add">
         
-        <span id="${pizza.name}Amount" class="amount-span">amount</span>
-        <span id="${pizza.name}MinusBtn" class="material-symbols-outlined minusBtn">-</span>
+        <span id="${pizza.name}Amount" class="amount-span">0</span>
+        <span id="${pizza.name}MinusBtn" class="material-symbols-outlined minusBtn">remove</span>
         <span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span>
         </div>
         
@@ -128,7 +128,6 @@ document
   .getElementById(`${pizza.name}MinusBtn`)
   .addEventListener('click', function () {
     handleSubtractToCart(pizza.id, pizza.name);
-    console.log('gitgut');
   });
 }
 
