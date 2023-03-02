@@ -92,12 +92,12 @@ formElement.insertAdjacentHTML("beforeend",
 `
 <form id="packageForm" class="packageForm" name="packageForm">
 <div id="orderFormTitle">Checkout</div>
-<div><input id="customerName" type="text" name="customerName" placeholder="name"></div>
-<div><input id="email" type="text" name="email" placeholder="email"></div>
+<div><input id="customerName" type="text" name="customerName" placeholder="name" required></div>
+<div><input id="email" type="email" name="email" placeholder="email" required></div>
 <div id="address">
 Address
-<div><input id="city" type="text" name="city" placeholder="city"></div>
-<div><input id="street" type="text" name="street" placeholder="street"></div>
+<div><input id="city" type="text" name="city" placeholder="city" required></div>
+<div><input id="street" type="text" name="street" placeholder="street" required></div>
 </div>
 <div><input id="orderBtn" type="submit" value="Order"/></div>
 </form>`
@@ -325,8 +325,14 @@ packageFormElement.addEventListener("submit", function (event) {
   form.customer.email = emailElement.value;
   form.customer.address.city = cityElement.value;
   form.customer.address.street = streetElement.value;
-  console.log('form', form);
-  sendFormData()
+  sendFormData();
+
+  rootElement.replaceChildren();
+  rootElement.insertAdjacentHTML('beforeend',
+  `<div id="thanksMessage">
+  <span class="text1"> Thank you </span>
+  <span class="text2"> for ordering! </span>
+  </div>`);
 })
 
 async function sendFormData() {
