@@ -46,21 +46,21 @@ let form = {
     minute: 0,
   },
   customer: {
-    name: "",
-    email: "",
+    name: '',
+    email: '',
     address: {
-      city: "",
-      street: "",
+      city: '',
+      street: '',
     },
   },
 };
-const rootElement = document.getElementById("root");
-rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`);
-let formElement = document.getElementById("form");
+const rootElement = document.getElementById('root');
+rootElement.insertAdjacentHTML('afterbegin', `<div id="form"></div>`);
+let formElement = document.getElementById('form');
 
 function createFilterInputAndShoppingButton() {
   rootElement.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `
 <div id="fixed" class="main"><div id="headline" class="main">
 
@@ -89,7 +89,7 @@ function createFilterInputAndShoppingButton() {
 
 function createForm() {
   formElement.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `
 <form id="packageForm" class="packageForm" name="packageForm">
 <div id="orderFormTitle">Checkout</div>
@@ -106,19 +106,19 @@ Address
 }
 main();
 
-const packageFormElement = document.getElementById("packageForm");
+const packageFormElement = document.getElementById('packageForm');
 
-const elementOfAllThePizzas = document.getElementById("pizzas");
-let customerNameElement = document.getElementById("customerName");
-let emailElement = document.getElementById("email");
-let cityElement = document.getElementById("city");
-let streetElement = document.getElementById("street");
+const elementOfAllThePizzas = document.getElementById('pizzas');
+let customerNameElement = document.getElementById('customerName');
+let emailElement = document.getElementById('email');
+let cityElement = document.getElementById('city');
+let streetElement = document.getElementById('street');
 
 let itemsInCart = [];
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
         <div id="add"></div>
@@ -135,30 +135,30 @@ function createElementForPizza(pizza) {
 
   document
     .getElementById(`${pizza.name}AddBtn`)
-    .addEventListener("click", function () {
+    .addEventListener('click', function () {
       handleAddToCart(pizza.id, pizza.name, pizza.price);
     });
 
   document
     .getElementById(`${pizza.name}MinusBtn`)
-    .addEventListener("click", function () {
+    .addEventListener('click', function () {
       handleSubtractToCart(pizza.id, pizza.name);
     });
 }
 
 function displayCartContentWhenClickCartButton() {
-  document.getElementById("cart").addEventListener("click", function () {
-    packageFormElement.classList.remove("packageForm");
-    console.log("cart", cart);
+  document.getElementById('cart').addEventListener('click', function () {
+    packageFormElement.classList.remove('packageForm');
+    console.log('cart', cart);
     itemsInCart.push(cart);
     formElement.insertAdjacentHTML(
-      "afterbegin",
+      'afterbegin',
       `<div id="cartContent" class="cartContent"><div id="cartTitle">Shopping Cart</div></div>`
     );
-    const cartContentElement = document.getElementById("cartContent");
+    const cartContentElement = document.getElementById('cartContent');
     itemsInCart[0].forEach((item) => {
       cartContentElement.insertAdjacentHTML(
-        "beforeend",
+        'beforeend',
         `
     <div id="itemName">item: <b>${item.name}</b><div>
     <div id="itemAmount">amount: <b>${item.amount}</b></div>
@@ -170,44 +170,44 @@ function displayCartContentWhenClickCartButton() {
     itemsInCart[0].forEach((item) => prices.push(item.price));
     const totalPrice = prices.reduce((a, b) => a + b);
     cartContentElement.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       `<div id="totalPrice"><div id="totalPriceTitle">Total price</div><div id="total"><b>${totalPrice} €</b></div></div>`
     );
 
-    const mainElements = document.getElementsByClassName("main");
+    const mainElements = document.getElementsByClassName('main');
     console.log(mainElements);
     Array.from(mainElements).forEach((el) => {
-      el.style.display = "none";
+      el.style.display = 'none';
     });
   });
 }
 
-const cartContentElement = document.getElementById("cartContent");
+const cartContentElement = document.getElementById('cartContent');
 console.log(cartContentElement);
 
 function createElementForPizzaAllergents(allergen, pizzaId) {
   document
     .getElementById(pizzaId)
-    .insertAdjacentHTML("beforeend", `<div class="material">${allergen}</div>`);
+    .insertAdjacentHTML('beforeend', `<div class="material">${allergen}</div>`);
 }
 
 function createOptionsForAllergens(allergen) {
   document
-    .getElementById("filter")
-    .insertAdjacentHTML("beforeend", `<option value="${allergen}">`);
+    .getElementById('filter')
+    .insertAdjacentHTML('beforeend', `<option value="${allergen}">`);
 }
 
 function createDivForAddedItems(addedItem) {
   document
-    .getElementById("itemName")
-    .insertAdjacentHTML("beforeend", `<div id="${addedItem}"></div>`);
+    .getElementById('itemName')
+    .insertAdjacentHTML('beforeend', `<div id="${addedItem}"></div>`);
 }
 
 function createElementForImage(pizzaId, url) {
   document
     .getElementById(pizzaId)
     .insertAdjacentHTML(
-      "afterbegin",
+      'afterbegin',
       `<div class="image"><img src="${url}" width="200" height="300"></div>`
     );
 }
@@ -244,8 +244,8 @@ function handleSubtractToCart(pizzaId, pizzaName) {
 function generateCurrentDate() {
   const currentDate = new Date().toJSON().slice(0, 10);
   const currentMinSec = new Date().toJSON().slice(11, 16);
-  let split = currentDate.split("-");
-  let splitMinSec = currentMinSec.split(":");
+  let split = currentDate.split('-');
+  let splitMinSec = currentMinSec.split(':');
   const date = {
     year: split[0],
     month: split[1],
@@ -257,10 +257,10 @@ function generateCurrentDate() {
 }
 
 async function fetchPizzas() {
-  const response = await fetch("http://127.0.0.1:9001/api/pizza");
+  const response = await fetch('http://127.0.0.1:9001/api/pizza');
   const pizzas = await response.json();
 
-  const res = await fetch("http://127.0.0.1:9001/api/allergen");
+  const res = await fetch('http://127.0.0.1:9001/api/allergen');
   const allergens = await res.json();
 
   pizzas.forEach((pizza) => {
@@ -285,24 +285,24 @@ async function fetchPizzas() {
 
   function filterPizzasByAllergent() {
     document
-      .getElementById("allergens")
-      .addEventListener("change", function (event) {
+      .getElementById('allergens')
+      .addEventListener('change', function (event) {
         allergens.forEach((allergen) => {
           if (allergen.name === event.target.value) {
-            console.log("allergen.name", allergen.name);
-            console.log("event.target.value", event.target.value);
-            document.getElementById("pizzas").replaceChildren();
+            console.log('allergen.name', allergen.name);
+            console.log('event.target.value', event.target.value);
+            document.getElementById('pizzas').replaceChildren();
             pizzas.filter((pizza) => {
               if (pizza.allergens.includes(allergen.id)) {
                 createElementForPizza(pizza);
                 createElementForImage(pizza.name, pizza.imgUrl);
                 allergens.forEach((allerg) => {
                   if (pizza.allergens.includes(allerg.id)) {
-                    console.log("tartalmazza");
+                    console.log('tartalmazza');
                     document
                       .getElementById(pizza.name)
                       .insertAdjacentHTML(
-                        "beforeend",
+                        'beforeend',
                         `<div class="name">${allerg.name}</div>`
                       );
                   }
@@ -316,7 +316,7 @@ async function fetchPizzas() {
   filterPizzasByAllergent();
 }
 
-packageFormElement.addEventListener("submit", function (event) {
+packageFormElement.addEventListener('submit', function (event) {
   event.preventDefault();
 
   form.date = generateCurrentDate();
@@ -328,7 +328,7 @@ packageFormElement.addEventListener("submit", function (event) {
 
   rootElement.replaceChildren();
   rootElement.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `<div id="thanksMessage">
   <span class="text1"> Thank you </span>
   <span class="text2"> for ordering! </span>
@@ -337,9 +337,9 @@ packageFormElement.addEventListener("submit", function (event) {
 });
 
 async function sendFormData() {
-  const res = await fetch("http://127.0.0.1:9001/api/order", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
+  const res = await fetch('http://127.0.0.1:9001/api/order', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(form),
   });
   const response = await res.json();
