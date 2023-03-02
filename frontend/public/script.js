@@ -27,7 +27,7 @@
 //  [{id: 1, name: "Dry Feet", amount: 2}
 //   {id: 8, name: "Making Toast with Musk", amount: 1}],
 let cart = [];
-let form = [{
+let form = {
   /* id: 0, */
   pizzas: /* [
     {id: 1, amount: 2}
@@ -47,7 +47,7 @@ let form = [{
       street: ""
     }
   }
-}];
+};
 
 
 const rootElement = document.getElementById("root");
@@ -69,6 +69,7 @@ rootElement.insertAdjacentHTML(
 <div id="footer" class="main"></div>
 `
 );
+
 
 rootElement.insertAdjacentHTML("afterbegin", `<div id="form"></div>`)
 let formElement = document.getElementById("form")
@@ -102,22 +103,34 @@ let itemsInCart = [];
 
 function createElementForPizza(pizza) {
   elementOfAllThePizzas.insertAdjacentHTML(
-    "beforeend",
+    'beforeend',
     `<div class="item" id="${pizza.name}">
         <div class="name">${pizza.name}</div>
-
-        <div id="add"><span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span></div>
+        <div id="add"></div>
+        <div id="add">
+        
+        <span id="${pizza.name}Amount" class="amount-span">amount</span>
+        <span id="${pizza.name}MinusBtn" class="material-symbols-outlined minusBtn">-</span>
+        <span id="${pizza.name}AddBtn" class="material-symbols-outlined addBtn">add</span>
+        </div>
         
         
     </div>`
   );
 
-  document.getElementById(`${pizza.name}AddBtn`).addEventListener("click", function () {
+  document
+  .getElementById(`${pizza.name}AddBtn`)
+  .addEventListener('click', function () {
     handleAddToCart(pizza.id, pizza.name, pizza.price);
-  })
+  });
+
+document
+  .getElementById(`${pizza.name}MinusBtn`)
+  .addEventListener('click', function () {
+    handleSubtractToCart(pizza.id, pizza.name);
+    console.log('gitgut');
+  });
 }
-//console.log('cart', cart)
-//console.log('itemsInCart', itemsInCart);
 
 
 
@@ -150,6 +163,17 @@ document.getElementById("cart").addEventListener("click", function() {
   })
 })
 
+// packageFormElement.addEventListener("submit", function (event) {
+//   event.preventDefault()
+
+//   cart.customer.name = customerNameElement.value
+//   cart.customer.email = emailElement.value
+//   cart.customer.address.city = cityElement.value
+//   cart.customer.address.street = streetElement.value
+//   cart.date = generateCurrentDate()
+//   sendFormData()
+//   console.log(form)
+// })
 const cartContentElement = document.getElementById("cartContent");
 console.log(cartContentElement);
 
@@ -183,19 +207,39 @@ function createElementForImage(pizzaId, url) {
 
 
 function handleAddToCart(pizzaId, pizzaName, pizzaPrice) {
-  let cartItemList = cart.filter((item) => item.id === pizzaId)
-
+  let cartItemList = cart.filter((item) => item.id === pizzaId); // ez nem finddal kellett volna ink?
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
   if (cartItemList.length === 0) {
-    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice})
+    cart.push({ id: pizzaId, name: pizzaName, amount: 1, price: pizzaPrice});
+    itemAmountElement.innerHTML = 1
   } else {
     cartItemList[0].amount += 1;
+    itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) + 1;
   }
-  
-  console.log("cart", cart)
+}
+
+
+
+
+function handleSubtractToCart(pizzaId, pizzaName) {
+
+  let itemAmountElement = document.getElementById(`${pizzaName}Amount`);
+  for (let i = 0; i < cart.length; i++) {
+    //mappal
+    if (cart[i].id === pizzaId ) {
+      cart[i].amount--;
+      if( cart.length > 0){
+        itemAmountElement.innerHTML = parseInt(itemAmountElement.innerHTML) - 1
+      }
+      if (cart[i].amount === 0) {
+        cart.splice(i, 1);
+      }
+      break;
+    }
+  }
 }
 
 function generateCurrentDate() {
-
   const currentDate = new Date().toJSON().slice(0, 10)
   const currentMinSec = new Date().toJSON().slice(11, 16)
   let split = currentDate.split("-")
@@ -207,9 +251,7 @@ function generateCurrentDate() {
     hour: splitMinSec[0],
     minute: splitMinSec[1]
   }
-  // console.log(currentMinSec)
-  return date
-
+  return date;
 }
 
 
@@ -256,7 +298,7 @@ async function fetchPizzas() {
                       .insertAdjacentHTML(
                         "beforeend",
                         `<div class="name">${allerg.name}</div>`
-                      ); 
+                      );
                   }
                 });
               }
@@ -272,32 +314,20 @@ fetchPizzas();
 packageFormElement.addEventListener("submit", function (event) {
   event.preventDefault()
 
-  form[0].date = generateCurrentDate();
-  form[0].customer.name = customerNameElement.value;
-  form[0].customer.email = emailElement.value;
-  form[0].customer.address.city = cityElement.value;
-  form[0].customer.address.street = streetElement.value;
+  form.date = generateCurrentDate();
+  form.customer.name = customerNameElement.value;
+  form.customer.email = emailElement.value;
+  form.customer.address.city = cityElement.value;
+  form.customer.address.street = streetElement.value;
   console.log('form', form);
+  sendFormData()
 })
 
 async function sendFormData() {
-  /* const myData = document.getElementById("myData");
-  const formData = new FormData(myData);
-
-  const obj = Object.fromEntries(formData); */
-
   const res = await fetch("http://127.0.0.1:9001/api/order", {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user: {
-        email: "email",
-        password: "password",
-      },
-    }),
+    body: JSON.stringify(form),
   });
   const response = await res.json();
-
-  console.log(response);
 }
-sendFormData();
