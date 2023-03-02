@@ -216,6 +216,24 @@ img:hover {
 }
 
 /* MAIN TITLE */
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#allergens {
+  height: 10px;
+}
+
+#cart {
+  margin: 0;
+}
+
+.title {
+  display: inline;
+}
+
 .title-word {
   animation: color-animation 4s linear infinite;
 }
