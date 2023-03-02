@@ -9,7 +9,7 @@
       "Aluminum",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 6.6,
     "allergens": [15, 14, 20]
   },
   
@@ -25,7 +25,7 @@
       "garlic",
       "olive oil"
     ],
-    "price": 3400,
+    "price": 8.5,
     "allergens": [15, 14]
   },
   {
@@ -40,7 +40,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 35,
     "allergens": [15, 16]
   },
   {
@@ -55,7 +55,7 @@
       "pepper",
       "olive oil"
     ],
-    "price": 3350,
+    "price": 40,
     "allergens": [15, 19, 14]
   },
   {
@@ -70,7 +70,7 @@
       "oregano",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 26.9,
     "allergens": [15, 16, 20]
   },
   
@@ -88,7 +88,7 @@
       "gorgonzola",
       "fontina"
     ],
-    "price": 3600,
+    "price": 17.5,
     "allergens": [15, 2]
   },
   {
@@ -103,7 +103,7 @@
       "garlic",
       "olive oil"
     ],
-    "price": 3500,
+    "price": 5.9,
     "allergens": [15, 4]
   },
   {
@@ -118,7 +118,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 15.9,
     "allergens": [15, 19, 20]
   },
   
@@ -134,7 +134,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 5.5,
     "allergens": [15]
   },
   {
@@ -149,7 +149,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 10.2,
     "allergens": [15]
   },
   {
@@ -164,7 +164,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 16.3,
     "allergens": [15]
   },
   {
@@ -179,7 +179,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 19.9,
     "allergens": [15, 16, 10]
   },
   {
@@ -194,7 +194,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 20.4,
     "allergens": [15, 4]
   },
   {
@@ -209,7 +209,7 @@
       "lime",
       "olive oil"
     ],
-    "price": 3200,
+    "price": 20.9,
     "allergens": [15, 4]
   }
 
