@@ -34,19 +34,23 @@ function createFilterInputAndShoppingButton() {
     `
 <div id="fixed" class="main"><div id="headline" class="main">
 
+
+    
+
+
         <div class="container">
+        <input list="filter" name="allergens" id="allergens" onfocus="this.value=''" onchange="this.blur();" placeholder="choose material">
+        <datalist id="filter"></datalist>
         <h2 class="title">
           <span class="title-word title-word-1">Very</span>
           <span class="title-word title-word-2">premium</span>
           <span class="title-word title-word-3">useful</span>
           <span class="title-word title-word-4">gadgets</span>
         </h2>
-        </div>
-    
-        <input list="filter" name="allergens" id="allergens" onfocus="this.value=''" onchange="this.blur();" placeholder="choose material">
-        <datalist id="filter"></datalist>
-
         <span id="cart" class="material-symbols-outlined">shopping_cart</span></br>
+        </div>
+
+
 
 
 </div>
