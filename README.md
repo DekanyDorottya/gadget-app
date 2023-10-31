@@ -1,43 +1,34 @@
+# Gadget Ordering Website
 
-
-# Gadget Ordering Backend
-
-This is the backend component of the Gadget Ordering web application. It handles the storage of orders and serves data to the frontend for processing.
+This is a simple web application for ordering gadget. Users can browse a list of gadgets, add them to their cart, and place an order. The website is built using HTML, CSS, and JavaScript.
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
 - [Usage](#usage)
-
+- [Project Structure](#project-structure)
+- [API](#api)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Getting Started
 
-Before running the backend, ensure you have the necessary dependencies installed and a running database system if required. To get started, follow these steps:
-
-1. Clone this repository to your local machine:
-
-```shell
-git clone git@github.com:DekanyDorottya/gadget-app.git
-```
-
-2. Install the required Node.js packages by running:
-
-```shell
-npm install
-```
-
-3. Start the backend server:
-
-```shell
-node server.js
-```
+To get started with this project, you will need a web server to serve the HTML, CSS, and JavaScript files. You can use a local development server or host the files on a web server of your choice. The project is designed to work with a backend server that provides gadget data.
 
 ## Usage
 
-1. Ensure the backend is running on your server.
+1. Clone the repository to your local machine:
 
-2. The frontend of the Gadget Ordering application makes HTTP requests to these endpoints to interact with the backend and manage orders.
+   ```shell
+   git clone https://github.com/your/repo.git
+   ```
 
-3. The backend processes incoming requests, stores order data, and provides responses to the frontend.
+2. Start a web server to serve the HTML file. You can use tools like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) if you are using Visual Studio Code.
+
+3. Make sure you have a backend server running:
+ ```shell
+   npm i
+   node server.js
+   ```
+5. Access the website through your web server, and you can start browsing gadgets, adding them to your cart, and placing orders.
 
